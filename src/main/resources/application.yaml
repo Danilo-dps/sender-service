@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: sender-service
+  server:
+    port: 8080
+
+webhook:
+  receiver:
+    url: http://localhost:8081
+    secret: super-secreto-123
+
+logging:
+  level:
+    br.com.danilodps.sender: DEBUG
