@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 
 @RestController
-@RequestMapping("/api/v1/pedidos")
+@RequestMapping("/api/v1/orders")
 @RequiredArgsConstructor
 public class OrderController {
 
     private final OrderService orderService;
 
-    @PostMapping("/{pedidoId}/pagar")
+    @PostMapping("/{orderId}/pay")
     public ResponseEntity<String> pay(
-            @PathVariable String pedidoId,
-            @RequestParam(defaultValue = "199.90") BigDecimal valor) {
+            @PathVariable String orderId,
+            @RequestParam BigDecimal price) {
 
-        String resultado = orderService.processOrder(pedidoId, valor);
-        return ResponseEntity.accepted().body(resultado);
+        String result = orderService.processOrder(orderId, price);
+        return ResponseEntity.accepted().body(result);
     }
 
 }

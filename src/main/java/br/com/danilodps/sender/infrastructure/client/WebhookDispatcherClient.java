@@ -13,12 +13,13 @@ import org.springframework.web.client.RestClient;
 @RequiredArgsConstructor
 public class WebhookDispatcherClient {
 
+    private static final String WEBHOOK_URI = "/webhooks/order-event";
     private final RestClient webhookRestClient;
 
     public void send(String signature, String eventId, EventRequest event) {
         try {
             webhookRestClient.post()
-                    .uri("/webhooks/pedido-evento")
+                    .uri(WEBHOOK_URI)
                     .header("X-Webhook-Signature", signature)
                     .header("X-Webhook-Id", eventId)
                     .contentType(MediaType.APPLICATION_JSON)
@@ -27,6 +28,7 @@ public class WebhookDispatcherClient {
                     .toBodilessEntity();
 
             log.info("[Sender] Webhook entregue com sucesso: {}", eventId);
+//            throw new ResourceAccessException("Erro simulado");
         } catch (ResourceAccessException e) {
             log.error("[Sender] Falha de conexão ao send webhook {}: {}", eventId, e.getMessage());
             throw e; // propaga para o @Retryable atuar
