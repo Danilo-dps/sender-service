@@ -1,13 +1,13 @@
 spring:
   application:
     name: sender-service
-  server:
-    port: 8080
+server:
+    port: ${SERVER_PORT}
 
 webhook:
   receiver:
-    url: http://localhost:8081
-    secret: super-secreto-123
+    url: ${WEBHOOK_RECEIVER_URL}
+  secret: ${WEBHOOK_SECRET}
 
 logging:
   level:

@@ -20,7 +20,7 @@ public class WebhookDispatcherService {
     private final WebhookDispatcherClient client;
     private final WebhookSignatureService signatureService;
 
-    @Value("${webhook.secret:super-secreto-123}")
+    @Value("${webhook.secret}")
     private String secret;
 
     @Async
